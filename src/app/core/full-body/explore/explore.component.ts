@@ -7,13 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExploreComponent implements OnInit {
 
-  toggler = false;
+  toggler = true;
   constructor() { }
 
   onClick() {
     this.toggler = !this.toggler;
   }
   ngOnInit() {
+    // this.toggler = false;
   }
 
 }
