@@ -1,0 +1,54 @@
+<section id="control-head-section">
+  <div class="container">
+    <div class="row">
+      <div class="col text-center">
+        <div class="p-5">
+          <h1 class="display-4">Controle</h1>
+          <p class="lead">
+            O seu condomínio passa a ser controlado online de forma simples e efetiva. O síndico possui autonomia para permitir e remover
+            acesso além de criar espaços para reservas através do computador, tablet ou celular.
+          </p>
+          <a (click)="onClick()" class="btn btn-outline-secondary d-sm-none">Veja mais</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="explore-section" class="bg-light text-muted py-5" [ngClass]="{'d-none d-sm-block': toggler}">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <ngb-tabset justify="start">
+          <ngb-tab title="Síndico" id="sindicoTab">
+            <ng-template ngbTabContent>
+              <div class="container border border-top-0 rounded-bottom bg-tabs">
+                <div class="row">
+                  <div class="col-md-4">- Controle de condôminos</div>
+                  <div class="col-md-4">- Controle de espaços</div>
+                  <div class="col-md-4">- Reserva de eventos</div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+          <ngb-tab title="Condôminos" id="condominoTab">
+            <ng-template ngbTabContent>
+              <div class="container border border-top-0 rounded-bottom bg-tabs">
+                <div class="row">
+                  <div class="col-sm-4">- Controle de condôminos</div>
+                  <div class="col-sm-4">- Controle de espaços</div>
+                  <div class="col-sm-4">- Reserva de eventos</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">- Controle de funcionários</div>
+                    <div class="col-sm-4">- Controle de convidados</div>
+                    <div class="col-sm-4">- Reporte de incidentes</div>
+                  </div>
+              </div>
+            </ng-template>
+          </ngb-tab>
+        </ngb-tabset>
+      </div>
+    </div>
+  </div>
+</section>

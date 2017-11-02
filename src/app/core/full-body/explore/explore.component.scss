@@ -1,0 +1,20 @@
+@import '~scss/variables';
+
+.bg-tabs {
+  background: #fff;
+}
+
+/*Tab Explorar*/
+#sindicoTab,
+#condominoTab,
+#portariaTab {
+  margin-right: 0.25em;
+  color: #fff;
+  background-color: $primary-color;
+  border-color: $primary-color;
+  &.active {
+    border-color: $primary-color;
+    color: $primary-color;
+    background-color: #fff;
+  }
+}

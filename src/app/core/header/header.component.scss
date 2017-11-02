@@ -1,0 +1,9 @@
+@import '~scss/variables';
+
+.navbar {
+  border-bottom: $primary-color 2px solid;
+
+}
+.navbar-toggler {
+  cursor: pointer;
+}

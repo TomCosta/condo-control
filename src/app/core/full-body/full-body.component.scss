@@ -1,0 +1,51 @@
+@import '~scss/variables';
+
+#home-section {
+  background: $bg-body-image no-repeat;
+  min-height: 700px;
+  max-height: 100%;
+  background-size: cover;
+  background-attachment: fixed;
+
+  .bg-login-form {
+    background: $bg-login-form;
+    color: $font-color-form;
+  }
+
+  .dark-overlay {
+    background-color: $dark-overlay;
+    top:0;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    min-height: 700px;
+  }
+
+  .home-inner {
+    padding-top: 120px;
+  }
+
+  .card-form {
+    opacity: 0.8;
+  }
+
+  .fa-check{
+    color: #fff;
+    background: #333;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: $icon-size;
+  }
+}
+
+#sindico {
+  margin-right: 0.25em;
+  color: #fff;
+  background-color: #18BC9C;
+  border-color: #18BC9C;
+  &.active {
+    border-color: #18BC9C;
+    color: #18BC9C;
+    background-color: #fff;
+  }
+}

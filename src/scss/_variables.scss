@@ -1,0 +1,34 @@
+/*Font Awesome*/
+$fa-font-path : '~font-awesome/fonts';
+
+/*header*/
+$primary-color: #18BC9C;
+
+/*body*/
+$bg-color: #fff;
+$font-color: #333;
+$bg-login-form: #4b4b4b;
+$bg-body-image: url('~assets/images/background.jpg');
+$dark-overlay: rgba(255, 255, 255, 0.8);
+$icon-size: 30px;
+
+/*footer*/
+$bg-footer: #fff;
+
+/*login form*/
+$font-color-form: #fff;
+
+
+/*BOOTSTRAP VARIABLES*/
+
+$link-hover-color:          none;
+
+/*NAV*/
+$nav-tabs-border-color:             $primary-color;
+$nav-tabs-link-active-border-color: $primary-color;
+$border-color:                      $primary-color;
+$body-bg:                           $primary-color;
+$nav-tabs-link-active-color:        #fff;
+$nav-tabs-link-hover-border-color:  $primary-color;
+$font-family-base:                  Titillium Web;
+$input-focus-border-color:          lighten($primary-color, 25%);

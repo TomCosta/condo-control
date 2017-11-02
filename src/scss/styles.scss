@@ -1,0 +1,18 @@
+@import './variables';
+@import '~bootstrap/scss/bootstrap';
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web');
+
+/*Font-Awesome*/
+@import '~font-awesome/scss/font-awesome';
+
+/*START THE CODE*/
+body {
+  background: $bg-color;
+  color: $font-color;
+}
+
+.nav-link {
+  margin-right: 0.25em;
+  color: $primary-color;
+}
+

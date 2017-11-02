@@ -1,0 +1,93 @@
+<header id="home-section">
+  <div class="dark-overlay">
+    <div class="home-inner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 d-none d-md-block">
+            <h1 class="display-4">Seu
+              <strong> condomínio</strong>
+              em suas mãos e em qualquer lugar</h1>
+            <div class="d-flex flex-row">
+              <div class="p-4 align-self-start">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="p-4 align-self-end">
+                Lista de moradores e funcionários com foto, veículos e vaga de garagem disponível 24 horas para todos os usuários
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="p-4 align-self-start">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="p-4 align-self-end">
+                Reserva de espaços para dia/tarde/noite com atualização instantânea e aviso no celular
+              </div>
+            </div>
+            <div class="d-flex flex-row">
+              <div class="p-4 align-self-start">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="p-4 align-self-end">
+                Controle de convidados com confirmação de presença pela portaria e ainda possibilidade de relatar incidentes
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card bg-login-form text-center card-form p-2">
+              <div class="card-block">
+                <h3>Spazio Carmenere</h3>
+                <p>Acesso ao sistema</p>
+                <form>
+                  <div class="row p-2">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="form-group">
+                        <label class="sr-only" for="email">E-mail</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon" style="width: 2.6rem">
+                            <i class="fa fa-at"></i>
+                          </div>
+                          <input type="email" name="email" class="form-control" id="email" placeholder="email@provedor.com" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row p-2">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      <div class="form-group">
+                        <label class="sr-only" for="password">Senha</label>
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon" style="width: 2.6rem">
+                            <i class="fa fa-key"></i>
+                          </div>
+                          <input type="password" name="password" class="form-control" id="password" placeholder="Senha" required>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 text-left ml-2">
+                      <label class="custom-control custom-checkbox">
+                        <input class="custom-control-input" name="remember" type="checkbox">
+                        <span class="custom-control-indicator"></span>
+                        <span>Permanecer conectado</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row p-2">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                      <button type="button" class="btn btn-outline-light btn-block" (click)="onClick()">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>&nbsp; Entrar</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<app-explore></app-explore>
+<app-contact></app-contact>
