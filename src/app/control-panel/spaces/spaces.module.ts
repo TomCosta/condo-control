@@ -7,7 +7,7 @@ import { SpacesListComponent } from './spaces-list/spaces-list.component';
 import { SpaceDetailComponent } from './space-detail/space-detail.component';
 import { SpacesComponent } from './spaces.component';
 import { SpacesRoutingModule } from './spaces-routing.module';
-import { SpaceItemComponent } from '../../spaces/spaces-list/space-item/space-item.component';
+import { SpaceItemComponent } from '../spaces/spaces-list/space-item/space-item.component';
 
 @NgModule({
   imports: [
