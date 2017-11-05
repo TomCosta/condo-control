@@ -22,6 +22,7 @@ $font-color-form: #fff;
 /*BOOTSTRAP VARIABLES*/
 
 $link-hover-color:          none;
+$enable-shadows:            true;
 
 /*NAV*/
 $nav-tabs-border-color:             $primary-color;
@@ -32,3 +33,11 @@ $nav-tabs-link-active-color:        #fff;
 $nav-tabs-link-hover-border-color:  $primary-color;
 $font-family-base:                  Titillium Web;
 $input-focus-border-color:          lighten($primary-color, 25%);
+
+
+/*IMAGES*/
+$thumbnail-bg:                      rgb(235, 235, 235);
+
+/*CARDS*/
+$card-spacer-y:                     .50rem;
+$card-spacer-x:                     .75rem;
