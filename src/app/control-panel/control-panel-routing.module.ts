@@ -8,7 +8,8 @@ import { WelcomeControlPanelComponent } from './welcome-control-panel/welcome-co
 const CPANEL_ROUTES: Routes = [
   { path: '', component: ControlPanelComponent, children: [
     { path: '', component: WelcomeControlPanelComponent },
-    { path: 'reservations', loadChildren: './reservations/reservations.module#ReservationsModule'}
+    { path: 'reservations', loadChildren: './reservations/reservations.module#ReservationsModule'},
+    { path: 'spaces', loadChildren: './spaces/spaces.module#SpacesModule'}
   ] }
 ];
 
