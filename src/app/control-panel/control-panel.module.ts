@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { MenuLeftComponent } from './menu-left/menu-left.component';
 import { WelcomeControlPanelComponent } from './welcome-control-panel/welcome-control-panel.component';
@@ -12,6 +13,7 @@ import { ControlPanelComponent } from './control-panel.component';
     WelcomeControlPanelComponent
   ],
   imports: [
+    CommonModule,
     ControlPanelRoutingModule
   ]
 })

@@ -10,6 +10,7 @@ import { FooterComponent } from './core/footer/footer.component';
 import { ExploreComponent } from './core/full-body/explore/explore.component';
 import { ContactComponent } from './core/full-body/contact/contact.component';
 import { HomeComponent } from './core/home/home.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HomeComponent } from './core/home/home.component';
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     NgbModule.forRoot(),
     AppRoutingModule
   ],

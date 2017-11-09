@@ -13,6 +13,9 @@ export class SpacesListComponent implements OnInit {
     new Space('Churrasqueira', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
     new Space('Churrasqueira2', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
     new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
+    new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
+    new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
+    new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
     new Space('Churrasqueira4', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg')
   ];
   constructor() { }

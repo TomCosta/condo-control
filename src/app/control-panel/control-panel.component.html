@@ -1,11 +1,79 @@
+<div class="wrapper">
+  <!-- Sidebar Holder -->
+  <div id="sidebar" class="bg-light" [ngClass]="{'active': toggle}">
+    <div class="sidebar-header bg-dark text-center">
+      <img src="http://theideasbodega.com.au/wp-content/uploads/2015/01/neytiri_in_avatar_2-wide-do-we-really-need-avatar-2.jpeg"
+      alt="" class="img-fluid rounded" style="min-width: 60px;">
+      </div>
 
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-1">
-        <app-menu-left></app-menu-left>
-    </div>
-    <div class="col-sm-11">
-        <router-outlet></router-outlet>
-    </div>
+    <ul class="list-unstyled">
+        <li>
+            <a >
+              <i class="fa fa-home"></i>
+              Início
+            </a>
+          </li>
+      <li>
+        <a >
+          <i class="fa fa-newspaper-o"></i>
+          Notícias
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-address-book"></i>
+          Cadastros
+        </a>
+        <a >
+          <i class="fa fa-exclamation-triangle"></i>
+          Avisos
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-file-o"></i>
+          Documentos
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-calendar"></i>
+          Reservas
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="fa fa-camera"></i>
+          Fotos
+        </a>
+      </li>
+      <div class="line"></div>
+      <li>
+          <a href="#">
+            <i class="fa fa-sign-out"></i>
+            Sair
+          </a>
+        </li>
+    </ul>
   </div>
+
+  <div class="container-fluid" id="container-fluid">
+      <nav class="navbar navbar-dark bg-light">
+          <button type="button" (click)="toggle=!toggle" id="sidebarCollapse" class="btn btn-info navbar-btn">
+            <i class="fa fa-align-left"></i>
+          </button>
+          <span class="float-right">
+              <h5>Wagner D'Amaral</h5>
+          </span>
+    </nav>
+
+  <div class="container-fluid">
+    <!-- Page Content Holder -->
+    <!-- <div id="content"> -->
+
+
+      <router-outlet></router-outlet>
+    <!-- </div> -->
+  </div>
+</div>
 </div>
