@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MenuLeftComponent } from './menu-left/menu-left.component';
@@ -19,5 +19,4 @@ import { ControlPanelComponent } from './control-panel.component';
 })
 
 export class ControlPanelModule {
-
 }

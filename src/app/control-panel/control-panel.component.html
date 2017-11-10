@@ -1,6 +1,6 @@
 <div class="wrapper">
   <!-- Sidebar Holder -->
-  <div id="sidebar" class="bg-light" [ngClass]="{'active': toggle}">
+  <div id="sidebar" class="bg-light shadow-bars" [ngClass]="{'active': toggle}">
     <div class="sidebar-header bg-dark text-center">
       <img src="http://theideasbodega.com.au/wp-content/uploads/2015/01/neytiri_in_avatar_2-wide-do-we-really-need-avatar-2.jpeg"
       alt="" class="img-fluid rounded" style="min-width: 60px;">
@@ -8,13 +8,13 @@
 
     <ul class="list-unstyled">
         <li>
-            <a >
+            <a routerLink="/control-panel">
               <i class="fa fa-home"></i>
               Início
             </a>
           </li>
       <li>
-        <a >
+        <a routerLink="/control-panel/spaces" >
           <i class="fa fa-newspaper-o"></i>
           Notícias
         </a>
@@ -59,9 +59,10 @@
 
   <div class="container-fluid" id="container-fluid">
       <nav class="navbar navbar-dark bg-light">
-          <button type="button" (click)="toggle=!toggle" id="sidebarCollapse" class="btn btn-info navbar-btn">
+          <button type="button" (click)="toggle=!toggle" id="sidebarCollapse" class="btn btn-sm btn-outline-dark">
             <i class="fa fa-align-left"></i>
           </button>
+          <span> {{ routeTitle }} </span>
           <span class="float-right">
               <h5>Wagner D'Amaral</h5>
           </span>

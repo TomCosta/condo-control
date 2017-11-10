@@ -18,3 +18,13 @@ body {
   margin-right: 0.25em;
   color: $primary-color;
 }
+
+.shadow-bars {
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-general {
+  -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), -1px 0 3px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), -1px 0 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1), -1px 0 3px rgba(0, 0, 0, 0.1);
+}

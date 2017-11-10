@@ -1,13 +1,78 @@
-<div class="card-body text-center mt-3">
-  <h4 class="card-title">{{ space.name }}</h4>
-  <hr>
-  <img [src]="space.picture" class="img-fluid rounded" style="max-height: 80px" alt="{{ space.name }}">
-  <div class="d-inline-flex p-2">
-    <button type="button" class="btn btn-outline-success m-1">
-      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-    </button>
-    <button type="button" class="btn btn-outline-danger m-1">
-      <i class="fa fa-trash" aria-hidden="true"></i>
-    </button>
-  </div>
-</div>
+<ng-container *ngIf="addMode; else normalTemplate">
+    <div class="card-body text-center mt-3 shadow-general">
+        <form (ngSubmit)="onAddSpace(form)" #form="ngForm">
+          <div class="input-group">
+            <input
+              type="text"
+              id="space"
+              class="form-control"
+              placeholder="Nome do espaço"
+              name="spaceName"
+              required
+              ngModel
+              >
+          </div>
+          <hr>
+          <label class="custom-file">
+              <input type="file" id="file" class="custom-file-input" placeholder="Selecione uma foto...">
+              <span class="custom-file-control"></span>
+            </label>
+          <div class="d-inline-flex p-2">
+            <button [disabled]="!form.valid" type="submit" class="btn btn-outline-success m-1">
+              <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-outline-dark m-1" (click)="onCancelAdd()">
+              <i class="fa fa-times" aria-hidden="true"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+</ng-container>
+<ng-template #normalTemplate>
+
+    <div class="card-body text-center mt-3 shadow-general">
+
+          <ng-container *ngIf="!editMode; then noEditMode; else yesEditMode"></ng-container>
+          <ng-template #noEditMode>
+            <h4 class="card-title" (click)="onEnableEdit()">{{ space.name }}</h4>
+            <hr>
+            <img [src]="space.picture" class="img-fluid rounded" style="max-height: 80px" alt="{{ space.name }}">
+            <div class="d-inline-flex p-2">
+              <button type="button" class="btn btn-outline-success m-1" *ngIf="editMode" (click)="onEnableEdit()">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+              </button>
+              <button (click)="onDelete()"type="button" class="btn btn-outline-danger m-1">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </div>
+          </ng-template>
+          <ng-template #yesEditMode>
+            <form (ngSubmit)="onUpdate()" #form="ngForm" >
+              <div class="input-group">
+                <input
+                type="text"
+                class="form-control"
+                name="updatedSpaceName"
+                required
+                [(ngModel)] = "updatedSpaceName"
+                >
+              </div>
+              <hr>
+              <img [src]="space.picture" class="img-fluid rounded" style="max-height: 80px" alt="{{ space.name }}">
+              <div class="d-inline-flex p-2">
+                <button [disabled]="!form.dirty || !form.valid" type="submit" class="btn btn-outline-success m-1">
+                  <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="btn btn-outline-dark m-1" (click)="onCancelEdit()">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+              </div>
+            </form>
+          </ng-template>
+
+
+          </div>
+
+
+</ng-template>
+

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { SpacesWelcomeComponent } from './spaces-welcome/spaces-welcome.component';
 import { SpaceEditComponent } from './space-edit/space-edit.component';
@@ -11,6 +12,7 @@ import { SpaceItemComponent } from '../spaces/spaces-list/space-item/space-item.
 
 @NgModule({
   imports: [
+    FormsModule,
     CommonModule,
     SpacesRoutingModule
   ],

@@ -9,8 +9,9 @@ const SPACES_ROUTE: Routes = [
   { path: '', component: SpacesComponent, children: [
     { path: '', component: SpacesListComponent },
     { path: 'new', component: SpaceEditComponent },
-    { path: ':id', component: SpaceDetailComponent },
-    { path: ':id/edit', component: SpaceEditComponent }
+    // { path: ':id', component: SpaceDetailComponent },
+    // { path: ':id/edit', component: SpaceEditComponent },
+    { path: 'edit', component: SpaceEditComponent }
   ] },
 
 ];

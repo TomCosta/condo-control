@@ -7,9 +7,9 @@ import { WelcomeControlPanelComponent } from './welcome-control-panel/welcome-co
 
 const CPANEL_ROUTES: Routes = [
   { path: '', component: ControlPanelComponent, children: [
-    { path: '', component: WelcomeControlPanelComponent },
-    { path: 'reservations', loadChildren: './reservations/reservations.module#ReservationsModule'},
-    { path: 'spaces', loadChildren: './spaces/spaces.module#SpacesModule'}
+    { path: '', component: WelcomeControlPanelComponent, data: {title: 'Condomínio Carmenere'} },
+    { path: 'reservations', data: {title: 'Reservas'}, loadChildren: './reservations/reservations.module#ReservationsModule'},
+    { path: 'spaces', data: {title: 'Espaços'} , loadChildren: './spaces/spaces.module#SpacesModule'}
   ] }
 ];
 
