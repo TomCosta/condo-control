@@ -11,7 +11,7 @@ const SPACES_ROUTE: Routes = [
     { path: 'new', component: SpaceEditComponent },
     // { path: ':id', component: SpaceDetailComponent },
     // { path: ':id/edit', component: SpaceEditComponent },
-    { path: 'edit', component: SpaceEditComponent }
+    // { path: 'edit', component: SpaceEditComponent }
   ] },
 
 ];
