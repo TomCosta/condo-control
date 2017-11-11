@@ -1,24 +1,33 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
 
 import { Space } from './../../shared/space.model';
 import { SpacesService } from '../spaces.service';
-import { Subscription } from 'rxjs/Subscription';
-import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import * as fromSpaces from '../store/spaces.reducers';
 
 @Component({
   selector: 'app-spaces-list',
   templateUrl: './spaces-list.component.html',
   styleUrls: ['./spaces-list.component.scss']
 })
+
 export class SpacesListComponent implements OnInit, OnDestroy {
-  spaces: Space[] = [];
+  // spacesState: Observable<fromSpaces.State>; UTILIZAR LOGO QUE CORRIGIR NGRX
+  spaces: Space[];
+
   private addMode = false;
 
   subscription: Subscription;
 
-  constructor(private spacesService: SpacesService) { }
+  constructor(private spacesService: SpacesService,
+              // private store: Store<fromSpaces.FeatureState>
+            ) { }
 
   ngOnInit() {
+    // this.spacesState = this.store.select('spaces'); UTILIZAR LOGO QUE CORRIGIR NGRX
+
     this.subscription = this.spacesService.addModeActivated
     .subscribe(
       (addMode: boolean) => {
