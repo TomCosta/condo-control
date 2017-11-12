@@ -8,6 +8,7 @@ export interface FeatureState {
 
 export interface State {
   spaces: Space[];
+  addMode: boolean;
 }
 
 const initialState: State = {
@@ -19,10 +20,11 @@ const initialState: State = {
     new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
     new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
     new Space('Churrasqueira4', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg')
-  ]
+  ],
+  addMode: false
 };
 
-export function spacesReducer(state = initialState, action: SpacesActions.SpacesActions) {
+export function spacesReducers(state = initialState, action: SpacesActions.SpacesActions) {
   switch (action.type) {
     case SpacesActions.ADD_SPACE:
       return {
@@ -42,11 +44,16 @@ export function spacesReducer(state = initialState, action: SpacesActions.Spaces
           spaces: spaces
       };
     case SpacesActions.DELETE_SPACE:
-      const deletedSpaces = [state.spaces];
+      const deletedSpaces = [...state.spaces];
       deletedSpaces.splice(action.payload, 1);
       return {
         ...state,
           spaces: deletedSpaces
+      };
+    case SpacesActions.SWITCH_ADD_MODE:
+      return {
+        ...state,
+        addMode: action.payload
       };
       default:
         return state;

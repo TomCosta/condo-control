@@ -5,6 +5,7 @@ import { Space } from '../../shared/space.model';
 export const ADD_SPACE = 'ADD_SPACE';
 export const UPDATE_SPACE = 'UPDATE_SPACE';
 export const DELETE_SPACE = 'DELETE_SPACE';
+export const SWITCH_ADD_MODE = 'SWITCH_ADD_MODE';
 
 export class AddSpace implements Action {
   readonly type = ADD_SPACE;
@@ -24,4 +25,10 @@ export class DeleteSpace implements Action {
   constructor(public payload: number) {}
 }
 
-export type SpacesActions = AddSpace | UpdateSpace | DeleteSpace;
+export class SwitchAddMode implements Action {
+  readonly type = SWITCH_ADD_MODE;
+
+  constructor(public payload: boolean) {}
+}
+
+export type SpacesActions = AddSpace | UpdateSpace | DeleteSpace | SwitchAddMode;
