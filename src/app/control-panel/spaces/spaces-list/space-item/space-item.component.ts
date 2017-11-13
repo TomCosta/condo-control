@@ -1,8 +1,9 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/take';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+// import { Subscription } from 'rxjs/Subscription';
+// import 'rxjs/add/operator/take';
 
 import { Space } from '../../../shared/space.model';
 // import { SpacesService } from '../../spaces.service';
@@ -14,37 +15,40 @@ import * as fromSpaces from '../../store/spaces.reducers';
   templateUrl: './space-item.component.html',
   styleUrls: ['./space-item.component.scss']
 })
-export class SpaceItemComponent implements OnInit, OnDestroy {
+export class SpaceItemComponent {
   @Input() space: Space;
   @Input() index: number;
-  private addMode: boolean;
+  @Input() addMode: boolean;
   private editMode = false;
+  private modalReference: any;
+  private enableSB = false;
   // updatedSpaceName: string;
   // updatedSpace: Space;
-  private subscription: Subscription;
+  // private subscription: Subscription;
   updatedSpaceName: string;
   updatedPicture: string;
+  closeResult: string;
 
-  constructor(
+  constructor(private modalService: NgbModal,
               // private spacesService: SpacesService,
               private store: Store<fromSpaces.FeatureState>) { }
 
-  ngOnInit() {
-    this.subscription = this.store.select('spaces')
-      .take(1)
-      .subscribe(
-        data => {
-          if (data.addMode) {
-            this.addMode = data.addMode;
-          } else {
-            this.addMode = false;
-          }
-        }
-      );
-  }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  // ngOnInit() {
+    // this.subscription = this.store.select('spaces')
+    //   .take(1)
+    //   .subscribe(
+    //     data => {
+    //       if (data.addMode) {
+    //         this.addMode = data.addMode;
+    //       } else {
+    //         this.addMode = false;
+    //       }
+    //     }
+    //   );
+  // }
+  // ngOnDestroy() {
+  //   // this.subscription.unsubscribe();
+  // }
 
   onEnableEdit() {
     this.editMode = true;
@@ -83,5 +87,29 @@ export class SpaceItemComponent implements OnInit, OnDestroy {
     // this.spacesService.addSpace(newSpace);
     this.store.dispatch(new SpacesActions.AddSpace(newSpace));
     this.store.dispatch(new SpacesActions.SwitchAddMode(false));
+  }
+
+  open(content) {
+    // this.showSnackBar();
+    this.modalReference = this.modalService.open(content);
+      // this.closeResult = `Closed with: ${result}`;
+    // }, (reason) => {
+    //   this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    // });
+  }
+
+  onConfirmExclusion () {
+    // this.showSnackBar();
+    this.modalReference.close();
+    this.onDelete();
+
+  }
+
+  showSnackBar() {
+    this.enableSB = true;
+
+    setTimeout(() => {
+      this.enableSB = !this.enableSB;
+    }, 2000);
   }
 }
