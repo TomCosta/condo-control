@@ -1,4 +1,4 @@
-import { NgModule, OnInit } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { WelcomeControlPanelComponent } from './welcome-control-panel/welcome-control-panel.component';

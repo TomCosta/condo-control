@@ -11,7 +11,8 @@ const CPANEL_ROUTES: Routes = [
     { path: '', component: WelcomeControlPanelComponent },
     { path: 'registers', component: RegistersComponent },
     { path: 'reservations', data: {title: 'Reservas'}, loadChildren: './reservations/reservations.module#ReservationsModule'},
-    { path: 'spaces', data: {title: 'Espaços'} , loadChildren: './spaces/spaces.module#SpacesModule'}
+    { path: 'spaces', data: {title: 'Espaços'} , loadChildren: './spaces/spaces.module#SpacesModule'},
+    { path: 'announcements', data: {title: 'Avisos'} , loadChildren: './announcements/announcements.module#AnnouncementsModule'}
   ] }
 ];
 
