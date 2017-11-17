@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="!(spacesState | async).loading">
   <div class="col-sm-6 col-md-6 col-lg-3 p-2 text-center" *ngFor="let spaceItem of (spacesState | async)?.spaces; let i = index;">
   <!-- <div class="col-sm-6 col-md-6 col-lg-3 p-2 text-center" *ngFor="let spaceItem of spaces; let i = index"> -->
     <app-space-item [space]="spaceItem" [index]="i"></app-space-item>
@@ -15,5 +15,10 @@
     <ng-template #yesAddMode>
       <app-space-item [addMode]="addMode"></app-space-item>
     </ng-template>
+  </div>
+</div>
+<div class="row" *ngIf="(spacesState | async).loading">
+  <div class="col-12 text-center">
+    <img src="../../../../assets/images/spinner.gif" class="img-responsive" style="max-height: 60px" alt="Loading...">
   </div>
 </div>
