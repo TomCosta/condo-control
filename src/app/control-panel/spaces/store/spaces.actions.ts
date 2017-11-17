@@ -2,27 +2,72 @@ import { Action } from '@ngrx/store';
 
 import { Space } from '../../shared/space.model';
 
-export const ADD_SPACE = 'ADD_SPACE';
-export const UPDATE_SPACE = 'UPDATE_SPACE';
-export const DELETE_SPACE = 'DELETE_SPACE';
-export const SWITCH_ADD_MODE = 'SWITCH_ADD_MODE';
+// export const GET_SPACE          = 'GET_SPACE';
+// export const GET_SPACE_SUCCESS  = 'GET_SPACE_SUCCESS';
 
-export class AddSpace implements Action {
-  readonly type = ADD_SPACE;
+export const GET_SPACES_REQUEST = 'GET_SPACES_REQUEST';
+export const GET_SPACES_SUCCESS = 'GET_SPACES_SUCCESS';
+
+export const ADD_SPACE_REQUEST  = 'ADD_SPACE_REQUEST';
+export const ADD_SPACE_SUCCESS  = 'ADD_SPACE_SUCCESS';
+
+export const UPDATE_SPACE_REQUEST = 'UPDATE_SPACE_REQUEST';
+export const UPDATE_SPACE_SUCCESS = 'UPDATE_SPACE_SUCCESS';
+
+export const DELETE_SPACE_REQUEST = 'DELETE_SPACE_REQUEST';
+export const DELETE_SPACE_SUCCESS = 'DELETE_SPACE_SUCCESS';
+
+export const SWITCH_ADD_MODE    = 'SWITCH_ADD_MODE';
+
+
+export class SpacesPayload {
+  constructor(public spaces: Space[]) { }
+}
+
+export class GetSpacesRequest implements Action {
+  readonly type = GET_SPACES_REQUEST;
+
+}
+
+export class GetSpacesSuccess implements Action {
+  readonly type = GET_SPACES_SUCCESS;
+
+  constructor(public payload: Space[]) {}
+}
+
+export class AddSpaceRequest implements Action {
+  readonly type = ADD_SPACE_REQUEST;
 
   constructor(public payload: Space) {}
 }
 
-export class UpdateSpace implements Action {
-  readonly type = UPDATE_SPACE;
+export class AddSpaceSuccess implements Action {
+  readonly type = ADD_SPACE_SUCCESS;
 
-  constructor(public payload: {index: number, updatedSpace: Space}) {}
+  constructor() {}
 }
 
-export class DeleteSpace implements Action {
-  readonly type = DELETE_SPACE;
+export class UpdateSpaceRequest implements Action {
+  readonly type = UPDATE_SPACE_REQUEST;
 
-  constructor(public payload: number) {}
+  constructor(public payload: {$key: string, updatedSpace: Space}) {}
+}
+
+export class UpdateSpaceSuccess implements Action {
+  readonly type = UPDATE_SPACE_SUCCESS;
+
+}
+
+export class DeleteSpaceRequest implements Action {
+  readonly type = DELETE_SPACE_REQUEST;
+
+  constructor(public payload: string) {}
+}
+
+export class DeleteSpaceSuccess implements Action {
+  readonly type = DELETE_SPACE_SUCCESS;
+
+  constructor() {}
 }
 
 export class SwitchAddMode implements Action {
@@ -31,4 +76,13 @@ export class SwitchAddMode implements Action {
   constructor(public payload: boolean) {}
 }
 
-export type SpacesActions = AddSpace | UpdateSpace | DeleteSpace | SwitchAddMode;
+export type SpacesActions =
+  AddSpaceRequest |
+  AddSpaceSuccess |
+  GetSpacesRequest |
+  GetSpacesSuccess |
+  UpdateSpaceRequest |
+  UpdateSpaceSuccess |
+  DeleteSpaceRequest |
+  DeleteSpaceSuccess |
+  SwitchAddMode;

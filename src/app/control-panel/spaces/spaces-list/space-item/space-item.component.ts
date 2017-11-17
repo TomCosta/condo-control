@@ -33,23 +33,6 @@ export class SpaceItemComponent {
               // private spacesService: SpacesService,
               private store: Store<fromSpaces.FeatureState>) { }
 
-  // ngOnInit() {
-    // this.subscription = this.store.select('spaces')
-    //   .take(1)
-    //   .subscribe(
-    //     data => {
-    //       if (data.addMode) {
-    //         this.addMode = data.addMode;
-    //       } else {
-    //         this.addMode = false;
-    //       }
-    //     }
-    //   );
-  // }
-  // ngOnDestroy() {
-  //   // this.subscription.unsubscribe();
-  // }
-
   onEnableEdit() {
     this.editMode = true;
 
@@ -62,7 +45,7 @@ export class SpaceItemComponent {
     this.onCancelEdit();
     const updatedSpace = new Space(this.updatedSpaceName, this.updatedPicture);
     // this.spacesService.updateSpace(updatedSpace, this.index);
-    this.store.dispatch(new SpacesActions.UpdateSpace({index: this.index, updatedSpace}));
+    this.store.dispatch(new SpacesActions.UpdateSpaceRequest({$key: this.space.$key, updatedSpace: updatedSpace}));
   }
 
   onCancelEdit() {
@@ -77,15 +60,15 @@ export class SpaceItemComponent {
 
   onDelete() {
     // this.spacesService.deleteSpace(this.index);
-    this.store.dispatch(new SpacesActions.DeleteSpace(this.index));
+    this.store.dispatch(new SpacesActions.DeleteSpaceRequest(this.space.$key));
   }
 
   onAddSpace(form: NgForm) {
     const value = form.value;
-    const newSpace: Space = new Space(value.spaceName);
+    const newSpace: Space = new Space(value.spaceName, 'foto');
 
     // this.spacesService.addSpace(newSpace);
-    this.store.dispatch(new SpacesActions.AddSpace(newSpace));
+    this.store.dispatch(new SpacesActions.AddSpaceRequest(newSpace));
     this.store.dispatch(new SpacesActions.SwitchAddMode(false));
   }
 

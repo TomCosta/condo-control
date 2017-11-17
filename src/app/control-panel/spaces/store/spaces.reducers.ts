@@ -9,46 +9,62 @@ export interface FeatureState {
 export interface State {
   spaces: Space[];
   addMode: boolean;
+  loading: boolean;
 }
 
 const initialState: State = {
-  spaces: [
-    new Space('Churrasqueira', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
-    new Space('Churrasqueira2', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
-    new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
-    new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
-    new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
-    new Space('Churrasqueira3', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg'),
-    new Space('Churrasqueira4', 'https://br.habcdn.com/files/dynamic_content/churrasqueira-3-em-1-1300623_big.jpg')
-  ],
-  addMode: false
+  spaces: [],
+  addMode: false,
+  loading: false
 };
 
 export function spacesReducers(state = initialState, action: SpacesActions.SpacesActions) {
   switch (action.type) {
-    case SpacesActions.ADD_SPACE:
+
+    case SpacesActions.GET_SPACES_REQUEST:
+    return Object.assign({}, state, {
+      spaces: null,
+      loading: true
+  });
+    case SpacesActions.GET_SPACES_SUCCESS:
+    return Object.assign({}, state, {
+      spaces: action.payload,
+      loading: false
+  });
+    case SpacesActions.ADD_SPACE_REQUEST:
       return {
         ...state,
-          spaces: [...state.spaces, action.payload]
+        ...action.payload,
+        loading: true
       };
-    case SpacesActions.UPDATE_SPACE:
-      const space = state.spaces[action.payload.index];
-      const updatedRecipe = {
-        ...space,
-        ...action.payload.updatedSpace
-      };
-      const spaces = [...state.spaces];
-      spaces[action.payload.index] = updatedRecipe;
+    case SpacesActions.ADD_SPACE_SUCCESS:
       return {
         ...state,
-          spaces: spaces
+          loading: false
       };
-    case SpacesActions.DELETE_SPACE:
-      const deletedSpaces = [...state.spaces];
-      deletedSpaces.splice(action.payload, 1);
+    case SpacesActions.UPDATE_SPACE_REQUEST:
       return {
         ...state,
-          spaces: deletedSpaces
+        ...action.payload,
+        loading: true
+      };
+
+    case SpacesActions.UPDATE_SPACE_SUCCESS:
+      return {
+        ...state,
+        loading: false
+      };
+
+    case SpacesActions.DELETE_SPACE_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case SpacesActions.DELETE_SPACE_SUCCESS:
+      return {
+        ...state,
+          // spaces: [...state],
+          loading: false
       };
     case SpacesActions.SWITCH_ADD_MODE:
       return {

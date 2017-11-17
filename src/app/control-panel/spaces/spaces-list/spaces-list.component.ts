@@ -16,16 +16,13 @@ import * as SpacesActions from '../store/spaces.actions';
 
 export class SpacesListComponent implements OnInit, OnDestroy {
   spacesState: Observable<fromSpaces.State>;
-  // spaces: Space[];
   private addMode: boolean;
 
   subscription: Subscription;
 
-  constructor(
-              // private spacesService: SpacesService,
-              private store: Store<fromSpaces.FeatureState>
-            ) { }
+  constructor(private store: Store<fromSpaces.FeatureState>) {}
 ngOnInit() {
+    this.store.dispatch(new SpacesActions.GetSpacesRequest());
     this.spacesState = this.store.select('spaces');
 
     this.subscription = this.store.select('spaces')
@@ -38,28 +35,12 @@ ngOnInit() {
         }
       }
     );
-    // this.subscription = this.spacesService.addModeActivated
-    // .subscribe(
-    //   (addMode: boolean) => {
-    //     this.addMode = addMode;
-    //   }
-    // );
-
-  //   this.subscription = this.spacesService.spacesChanged
-  //   .subscribe(
-  //     (spaces: Space[]) => {
-  //       this.spaces = spaces;
-  //     }
-  //   );
-  // this.spaces = this.spacesService.getSpaces();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
   enableAddMode() {
-    // this.addMode = true;
     this.store.dispatch(new SpacesActions.SwitchAddMode(true));
-    // this.spacesService.addModeActivated.next(true);
   }
 }
