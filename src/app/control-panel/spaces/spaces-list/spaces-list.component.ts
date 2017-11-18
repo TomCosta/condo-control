@@ -20,10 +20,11 @@ export class SpacesListComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
-  constructor(private store: Store<fromSpaces.FeatureState>) {}
+  constructor(private store: Store<fromSpaces.FeatureState>) {
+    this.spacesState = this.store.select('spaces');
+  }
 ngOnInit() {
     this.store.dispatch(new SpacesActions.GetSpacesRequest());
-    this.spacesState = this.store.select('spaces');
 
     this.subscription = this.store.select('spaces')
     .subscribe(

@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { AngularFireDatabase } from 'angularfire2/database';
+
+/** rxjs **/
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/operator/switchMap';
+import { map } from 'rxjs/operators/map';
+import { mergeMap } from 'rxjs/operators/mergeMap';
+import { catchError } from 'rxjs/operators/catchError';
+import { switchMap } from 'rxjs/operators/switchMap';
 
 import * as SpacesActions from './spaces.actions';
 import { Space } from '../../shared/space.model';
-import { SpacesService } from '../store/spaces.service';
-import { of } from 'rxjs/Observable/of';
+import { SpacesService } from '../spaces.service';
+
 
 @Injectable()
 export class SpacesEffects {
@@ -17,21 +20,42 @@ export class SpacesEffects {
 
   constructor(private actions$: Actions, private afs: AngularFireDatabase, private spacesService: SpacesService) {}
 
+  // @Effect()
+  // getSpaces$ = this.actions$.ofType(SpacesActions.GET_SPACES_REQUEST)
+  // .switchMap(payload => this.spacesService.getAllSpaces()
+  //   .map(spaces => {
+  //     return spaces.map(
+  //         res => {
+  //           const $key = res.payload.key;
+  //           const space: Space = {$key, ...res.payload.val()};
+  //           return space;
+  //         }
+  //   );
+  //   })
+  //   .map(res =>
+  //     new SpacesActions.GetSpacesSuccess(res)
+  //   ));
+
   @Effect()
   getSpaces$ = this.actions$.ofType(SpacesActions.GET_SPACES_REQUEST)
-  .switchMap(payload => this.afs.list(this.spacesList).snapshotChanges()
-    .map(spaces => {
-      return spaces.map(
-          res => {
-            const $key = res.payload.key;
-            const space: Space = {$key, ...res.payload.val()};
-            return space;
-          }
+  .pipe(
+    mergeMap(() => {
+      return this.spacesService.getAllSpaces()
+      .pipe(
+        map((spaces) => {
+          return this.spacesService.fromJson(spaces);
+        })
+      ).pipe(
+        map((res) => {
+          return new SpacesActions.GetSpacesSuccess(res);
+        }),
+        catchError((error: Error) => {
+            console.log('Erro:', error);
+            return '';
+          })
+        );
+      })
     );
-    })
-    .map(res =>
-      new SpacesActions.GetSpacesSuccess(res)
-    ));
 
   @Effect()
   addSpace$ = this.actions$.ofType(SpacesActions.ADD_SPACE_REQUEST)
