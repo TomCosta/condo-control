@@ -44,7 +44,7 @@ export class SpaceItemComponent implements OnDestroy {
   }
   uploadSingle(event) {
     this.selectedFiles = event.target.files;
-    let file = this.selectedFiles.item(0);
+    const file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
     this.upSvc.pushUpload(this.currentUpload);
   }
