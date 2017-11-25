@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Space } from './../../shared/space.model';
 import { SpacesService } from '../spaces.service';
 import * as fromSpaces from '../store/spaces.reducers';
-import * as SpacesActions from '../store/spaces.actions';
+import * as spaceActions from '../store/spaces.actions';
 
 @Component({
   selector: 'app-spaces-list',
@@ -15,16 +15,16 @@ import * as SpacesActions from '../store/spaces.actions';
 })
 
 export class SpacesListComponent implements OnInit, OnDestroy {
-  spacesState: Observable<fromSpaces.State>;
   private addMode: boolean;
 
+  spacesState: Observable<fromSpaces.State>;
   subscription: Subscription;
 
   constructor(private store: Store<fromSpaces.FeatureState>) {
     this.spacesState = this.store.select('spaces');
   }
 ngOnInit() {
-    this.store.dispatch(new SpacesActions.GetSpacesRequest());
+    this.store.dispatch(new spaceActions.GetSpacesRequest());
 
     this.subscription = this.store.select('spaces')
     .subscribe(
@@ -42,6 +42,6 @@ ngOnInit() {
     this.subscription.unsubscribe();
   }
   enableAddMode() {
-    this.store.dispatch(new SpacesActions.SwitchAddMode(true));
+    this.store.dispatch(new spaceActions.SwitchAddMode(true));
   }
 }

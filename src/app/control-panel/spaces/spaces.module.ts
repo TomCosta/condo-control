@@ -11,22 +11,28 @@ import { SpaceItemComponent } from '../spaces/spaces-list/space-item/space-item.
 import { spacesReducers } from './store/spaces.reducers';
 import { SpacesEffects } from './store/spaces.effects';
 import { SpacesService } from './spaces.service';
+import { UploadService } from '../shared/upload/upload.service';
+import { SharedModule } from '../../shared/shared.module';
+import { SpacesDirective } from './spaces.directive';
+// import { SpacesDirective } from './spaces.directive';
 
 
 @NgModule({
   imports: [
+    SharedModule,
     FormsModule,
     CommonModule,
     SpacesRoutingModule,
     StoreModule.forFeature('spaces', spacesReducers),
     EffectsModule.forFeature([SpacesEffects])
+    // SpacesDirective
   ],
   declarations: [
     SpacesComponent,
     SpacesListComponent,
     SpaceItemComponent
   ],
-  providers: [SpacesService]
+  providers: [SpacesService, UploadService]
 })
 
 export class SpacesModule {}

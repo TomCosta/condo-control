@@ -1,5 +1,8 @@
 <ng-container *ngIf="addMode; else normalTemplate">
     <div class="card-body text-center mt-3 shadow-general">
+        <div class="alert alert-danger" role="alert" *ngIf="currentUpload?.error !== null">
+            <strong>Erro!</strong> Por favor, verifique o tipo de arquivo e tamanho que deseja enviar.
+          </div>
         <form (ngSubmit)="onAddSpace(form)" #form="ngForm">
           <div class="input-group">
             <input
@@ -13,12 +16,25 @@
               >
           </div>
           <hr>
-          <label class="custom-file">
-              <input type="file" id="file" class="custom-file-input" placeholder="Selecione uma foto...">
-              <span class="custom-file-control"></span>
-            </label>
+          <img *ngIf="currentUpload?.url != null" [src]="currentUpload?.url" class="img-fluid rounded" style="max-height: 80px">
+          <ngb-progressbar *ngIf="currentUpload?.progress>0" showValue="true" type="success" [value]="currentUpload?.progress"></ngb-progressbar>
+          <div class="text-center">
+              <input
+              accept="image/*"
+              type="file"
+              id="file"
+              class="inputfile"
+              (change)="uploadSingle($event)"
+              required
+              >
+              <label for="file" class="btn btn-outline-secondary m-1"
+              ngbPopover="Somente fotos de até 2MB" triggers="mouseenter:mouseleave" popoverTitle="Atenção!">
+              <i class="fa fa-upload" aria-hidden="true"></i> Enviar foto</label>
+          </div>
           <div class="d-inline-flex p-2">
-            <button [disabled]="!form.valid" type="submit" class="btn btn-outline-success m-1">
+            <button
+            [disabled]="!form.valid || currentUpload?.progress < 100"
+            type="submit" class="btn btn-outline-success m-1">
               <i class="fa fa-floppy-o" aria-hidden="true"></i>
             </button>
             <button type="button" class="btn btn-outline-dark m-1" (click)="onCancelAdd()">
@@ -55,6 +71,7 @@
                 name="updatedSpaceName"
                 required
                 [(ngModel)] = "updatedSpaceName"
+                (keyup) = "updatingItem()"
                 >
               </div>
               <hr>
@@ -70,10 +87,9 @@
             </form>
           </ng-template>
           </div>
-
+  </ng-template>
 <!-- MODAL-->
 
-</ng-template>
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Confirmar exclusão?</h4>
@@ -86,3 +102,16 @@
     <button type="button" class="btn btn-outline-dark" (click)="d()">Cancelar</button>
   </div>
 </ng-template>
+
+<ng-template #editConfirm let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Deseja salvar alterações?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" (click)="onConfirmSaveEdit()">Sim</button>
+      <button type="button" class="btn btn-outline-dark" (click)="onCancelEditModal()">Não</button>
+    </div>
+  </ng-template>

@@ -21,4 +21,9 @@ export class SpacesService {
       }
     );
   }
+
+  checkItem(item: string) {
+    return item == null ? null : item;
+
+  }
 }

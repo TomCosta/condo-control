@@ -9,7 +9,7 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 import { catchError } from 'rxjs/operators/catchError';
 import { switchMap } from 'rxjs/operators/switchMap';
 
-import * as SpacesActions from './spaces.actions';
+import * as spacesActions from './spaces.actions';
 import { Space } from '../../shared/space.model';
 import { SpacesService } from '../spaces.service';
 
@@ -21,7 +21,7 @@ export class SpacesEffects {
   constructor(private actions$: Actions, private afs: AngularFireDatabase, private spacesService: SpacesService) {}
 
   // @Effect()
-  // getSpaces$ = this.actions$.ofType(SpacesActions.GET_SPACES_REQUEST)
+  // getSpaces$ = this.actions$.ofType(spacesActions.GET_SPACES_REQUEST)
   // .switchMap(payload => this.spacesService.getAllSpaces()
   //   .map(spaces => {
   //     return spaces.map(
@@ -33,11 +33,11 @@ export class SpacesEffects {
   //   );
   //   })
   //   .map(res =>
-  //     new SpacesActions.GetSpacesSuccess(res)
+  //     new spacesActions.GetSpacesSuccess(res)
   //   ));
 
   @Effect()
-  getSpaces$ = this.actions$.ofType(SpacesActions.GET_SPACES_REQUEST)
+  getSpaces$ = this.actions$.ofType(spacesActions.GET_SPACES_REQUEST)
   .pipe(
     mergeMap(() => {
       return this.spacesService.getAllSpaces()
@@ -47,7 +47,7 @@ export class SpacesEffects {
         })
       ).pipe(
         map((res) => {
-          return new SpacesActions.GetSpacesSuccess(res);
+          return new spacesActions.GetSpacesSuccess(res);
         }),
         catchError((error: Error) => {
             console.log('Erro:', error);
@@ -58,35 +58,35 @@ export class SpacesEffects {
     );
 
   @Effect()
-  addSpace$ = this.actions$.ofType(SpacesActions.ADD_SPACE_REQUEST)
-  .map((action: SpacesActions.AddSpaceRequest) => {
+  addSpace$ = this.actions$.ofType(spacesActions.ADD_SPACE_REQUEST)
+  .map((action: spacesActions.AddSpaceRequest) => {
     return action.payload;
   })
   .switchMap((space: Space) => {
     delete(space.$key);
     return fromPromise(this.afs.list(this.spacesList).push(space));
   })
-  .map(() => new SpacesActions.AddSpaceSuccess());
+  .map(() => new spacesActions.AddSpaceSuccess());
 
   @Effect()
-  deleteSpace$ = this.actions$.ofType(SpacesActions.DELETE_SPACE_REQUEST)
-  .map((action: SpacesActions.DeleteSpaceRequest) => {
+  deleteSpace$ = this.actions$.ofType(spacesActions.DELETE_SPACE_REQUEST)
+  .map((action: spacesActions.DeleteSpaceRequest) => {
     return action.payload;
   })
   .switchMap((key: string) => {
     return fromPromise(this.afs.list(this.spacesList).remove(key));
   })
-  .map(() => new SpacesActions.DeleteSpaceSuccess());
+  .map(() => new spacesActions.DeleteSpaceSuccess());
 
   @Effect()
-  updateSpace$ = this.actions$.ofType(SpacesActions.UPDATE_SPACE_REQUEST)
-  .map((action: SpacesActions.UpdateSpaceRequest) => {
+  updateSpace$ = this.actions$.ofType(spacesActions.UPDATE_SPACE_REQUEST)
+  .map((action: spacesActions.UpdateSpaceRequest) => {
     return action.payload;
   })
   .switchMap(payload => {
     delete(payload.updatedSpace.$key);
     return fromPromise(this.afs.list(this.spacesList).update(payload.$key, payload.updatedSpace));
   })
-  .map(() => new SpacesActions.UpdateSpaceSuccess());
+  .map(() => new spacesActions.UpdateSpaceSuccess());
 }
 

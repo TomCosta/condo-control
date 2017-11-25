@@ -10,27 +10,50 @@ export interface State {
   spaces: Space[];
   addMode: boolean;
   loading: boolean;
+  selectedItem: string;
+  updatedItem: {
+    name: string;
+    picture: string;
+  };
 }
 
 const initialState: State = {
   spaces: [],
   addMode: false,
-  loading: false
+  loading: false,
+  selectedItem: null,
+  updatedItem: {
+    name: '',
+    picture: ''
+  }
 };
 
 export function spacesReducers(state = initialState, action: SpacesActions.SpacesActions) {
   switch (action.type) {
 
+    case SpacesActions.UPDATE_FORM:
+    return {
+      ...state,
+      updatedItem: action.payload
+    };
+
+    case SpacesActions.SELECT_SPACE:
+    return {
+      ...state,
+      selectedItem: action.payload
+    };
+
     case SpacesActions.GET_SPACES_REQUEST:
-    return Object.assign({}, state, {
-      spaces: null,
+    return {
+      ...state,
       loading: true
-  });
+  };
     case SpacesActions.GET_SPACES_SUCCESS:
-    return Object.assign({}, state, {
+    return {
+      ...state,
       spaces: action.payload,
       loading: false
-  });
+  };
     case SpacesActions.ADD_SPACE_REQUEST:
       return {
         ...state,
@@ -52,7 +75,8 @@ export function spacesReducers(state = initialState, action: SpacesActions.Space
     case SpacesActions.UPDATE_SPACE_SUCCESS:
       return {
         ...state,
-        loading: false
+        loading: false,
+        selectedItem: null
       };
 
     case SpacesActions.DELETE_SPACE_REQUEST:

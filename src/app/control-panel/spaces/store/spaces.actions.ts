@@ -1,9 +1,17 @@
 import { Action } from '@ngrx/store';
+import { FormGroupDirective } from '@angular/forms';
 
 import { Space } from '../../shared/space.model';
 
 // export const GET_SPACE          = 'GET_SPACE';
 // export const GET_SPACE_SUCCESS  = 'GET_SPACE_SUCCESS';
+
+export const SELECT_SPACE = 'SELECT_SPACE';
+export const SELECT_SPACE_SUCCESS = 'SELECT_SPACE_SUCCESS';
+
+export const UPDATE_FORM = 'UPDATE_FORM';
+// export const UPDATE_FORM_SUCCESS = 'UPDATE_FORM_SUCCESS';
+
 
 export const GET_SPACES_REQUEST = 'GET_SPACES_REQUEST';
 export const GET_SPACES_SUCCESS = 'GET_SPACES_SUCCESS';
@@ -19,13 +27,15 @@ export const DELETE_SPACE_SUCCESS = 'DELETE_SPACE_SUCCESS';
 
 export const SWITCH_ADD_MODE    = 'SWITCH_ADD_MODE';
 
-
-export class SpacesPayload {
-  constructor(public spaces: Space[]) { }
-}
-
 export class GetSpacesRequest implements Action {
   readonly type = GET_SPACES_REQUEST;
+
+}
+
+export class SelectSpace implements Action {
+  readonly type = SELECT_SPACE;
+
+  constructor(public payload: string) {}
 
 }
 
@@ -76,7 +86,17 @@ export class SwitchAddMode implements Action {
   constructor(public payload: boolean) {}
 }
 
+
+export class UpdateForm implements Action {
+  readonly type = UPDATE_FORM;
+
+  constructor(public payload: {name: string, picture: string}) {}
+
+}
+
 export type SpacesActions =
+  UpdateForm |
+  SelectSpace |
   AddSpaceRequest |
   AddSpaceSuccess |
   GetSpacesRequest |
