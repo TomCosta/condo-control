@@ -8,11 +8,11 @@ import { Upload } from './upload.model';
 @Injectable()
 export class UploadService {
   constructor(private db: AngularFireDatabase) { }
-  private basePath = '/uploads/';
 
-  pushUpload(upload: Upload) {
+  pushUpload(upload: Upload, basePath: string) {
+    basePath = '/' + basePath + '/';
     const storageRef = firebase.storage().ref();
-    const uploadTask = storageRef.child(this.basePath + upload.file.name).put(upload.file);
+    const uploadTask = storageRef.child(basePath + (+ new Date).toString(36) + upload.file.name).put(upload.file);
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) =>  {
         // upload in progress
@@ -31,5 +31,13 @@ export class UploadService {
         upload.url = uploadTask.snapshot.downloadURL;
       }
     );
+  }
+
+  deleteFileStorage(name: string, basePath: string) {
+    // basePath = basePath + '/';
+    // name = name.substring(name.lastIndexOf('spaces') + 3, name.lastIndexOf('?'));
+    // console.log(name);
+    let storageRef = firebase.storage().ref();
+    storageRef.child(basePath + name).delete();
   }
 }

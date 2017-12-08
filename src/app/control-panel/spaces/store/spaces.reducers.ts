@@ -95,6 +95,15 @@ export function spacesReducers(state = initialState, action: SpacesActions.Space
         ...state,
         addMode: action.payload
       };
+    case SpacesActions.CLEAR_SELECTION:
+      return {
+        ...state,
+        selectedItem: null,
+        updatedItem: {
+          name: '',
+          picture: ''
+        }
+      };
       default:
         return state;
   }

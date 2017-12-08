@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -18,18 +18,17 @@ import 'rxjs/add/operator/take';
   styleUrls: ['./space-item.component.scss'],
   providers: []
 })
-export class SpaceItemComponent implements OnDestroy {
+export class SpaceItemComponent implements OnInit, OnDestroy {
   @Input() space: Space;
   @Input() index: number;
   @Input() addMode: boolean;
   private editMode = false;
   private modalReference: any;
   private enableSB = false;
-  updatedSpaceName: string;
-  updatedPicture: string;
-  closeResult: string;
-  selectedFiles: FileList;
-  currentUpload: Upload;
+  private updatedSpaceName: string;
+  private updatedPicture: string;
+  private selectedFiles: FileList;
+  private currentUpload: Upload;
 
   subscription: Subscription;
   @ViewChild('editConfirm') private editConfirm;
@@ -39,23 +38,35 @@ export class SpaceItemComponent implements OnDestroy {
               private upSvc: UploadService
               ) { }
 
+
+  ngOnInit() {
+    this.subscription = this.store.select('spaces').subscribe(
+      (state) => {
+        if (state.selectedItem === this.space.$key) {
+          this.editMode = true;
+        } else {
+          this.editMode = false;
+        }
+      }
+    );
+  }
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.subscription.unsubscribe();
   }
   uploadSingle(event) {
     this.selectedFiles = event.target.files;
     const file = this.selectedFiles.item(0);
     this.currentUpload = new Upload(file);
-    this.upSvc.pushUpload(this.currentUpload);
+    this.upSvc.pushUpload(this.currentUpload, 'spaces');
   }
 
   onEnableEdit() {
 
     this.subscription = this.store.select('spaces').take(1).subscribe(
       (data) => {
-        if (data.selectedItem === null) {
+        if (data.selectedItem === null || data.updatedItem.name === '') {
           this.store.dispatch(new SpacesActions.SelectSpace(this.space.$key));
-          this.editMode = true;
+          // this.editMode = true;
           this.updatedSpaceName = this.space.name;
           this.updatedPicture = this.space.picture;
         } else {
@@ -76,8 +87,7 @@ export class SpaceItemComponent implements OnDestroy {
   }
 
   onCancelEdit() {
-    this.editMode = false;
-    // this.updatedSpace = this.space;
+    this.store.dispatch(new SpacesActions.ClearSelection());
   }
 
   onCancelAdd() {
@@ -86,6 +96,7 @@ export class SpaceItemComponent implements OnDestroy {
 
   onDelete() {
     this.store.dispatch(new SpacesActions.DeleteSpaceRequest(this.space.$key));
+    this.upSvc.deleteFileStorage(this.space.picture, 'spaces');
   }
 
   onAddSpace(form: NgForm) {
@@ -126,7 +137,6 @@ export class SpaceItemComponent implements OnDestroy {
   onCancelEditModal () {
     this.modalReference.close();
     this.onCancelEdit();
-    this.store.dispatch(new SpacesActions.SelectSpace(null));
   }
 
   showSnackBar() {

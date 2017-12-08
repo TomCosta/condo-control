@@ -12,6 +12,7 @@ export const SELECT_SPACE_SUCCESS = 'SELECT_SPACE_SUCCESS';
 export const UPDATE_FORM = 'UPDATE_FORM';
 // export const UPDATE_FORM_SUCCESS = 'UPDATE_FORM_SUCCESS';
 
+export const CLEAR_SELECTION = 'CLEAR_SELECTION';
 
 export const GET_SPACES_REQUEST = 'GET_SPACES_REQUEST';
 export const GET_SPACES_SUCCESS = 'GET_SPACES_SUCCESS';
@@ -32,6 +33,12 @@ export class GetSpacesRequest implements Action {
 
 }
 
+export class GetSpacesSuccess implements Action {
+  readonly type = GET_SPACES_SUCCESS;
+
+  constructor(public payload: Space[]) {}
+}
+
 export class SelectSpace implements Action {
   readonly type = SELECT_SPACE;
 
@@ -39,10 +46,8 @@ export class SelectSpace implements Action {
 
 }
 
-export class GetSpacesSuccess implements Action {
-  readonly type = GET_SPACES_SUCCESS;
-
-  constructor(public payload: Space[]) {}
+export class ClearSelection implements Action {
+  readonly type = CLEAR_SELECTION;
 }
 
 export class AddSpaceRequest implements Action {
@@ -105,4 +110,5 @@ export type SpacesActions =
   UpdateSpaceSuccess |
   DeleteSpaceRequest |
   DeleteSpaceSuccess |
-  SwitchAddMode;
+  SwitchAddMode |
+  ClearSelection;
